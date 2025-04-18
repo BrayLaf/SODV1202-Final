@@ -47,12 +47,45 @@
         public void Print()
         {
             Console.Clear();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+
+            string horizontal = "╔═══╦═══╦═══╦═══╦═══╦═══╦═══╗";
+            string middle = "╠═══╬═══╬═══╬═══╬═══╬═══╬═══╣";
+            string bottom = "╚═══╩═══╩═══╩═══╩═══╩═══╩═══╝";
+
+            Console.WriteLine(horizontal);
+
             for (int r = 0; r < Rows; r++)
             {
+                Console.Write("║");
                 for (int c = 0; c < Cols; c++)
-                    Console.Write(grid[r, c] + " ");
+                {
+                    char symbol = grid[r, c];
+                    if (symbol == 'X') Console.ForegroundColor = ConsoleColor.Red;
+                    else if (symbol == 'O') Console.ForegroundColor = ConsoleColor.Yellow;
+                    else Console.ForegroundColor = ConsoleColor.White;
+
+                    Console.Write($" {symbol} ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("║");
+                }
+
                 Console.WriteLine();
+                if (r < Rows - 1)
+                    Console.WriteLine(middle);
             }
+
+            Console.WriteLine(bottom);
+
+            // Print column numbers
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("  ");
+            for (int c = 1; c <= Cols; c++)
+                Console.Write($" {c}  ");
+
+            Console.WriteLine("\n");
+            Console.ResetColor();
         }
 
         public char[,] GetGrid() => grid;
