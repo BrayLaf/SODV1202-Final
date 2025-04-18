@@ -47,6 +47,17 @@
         public void Print()
         {
             Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(@"
+   ____ ___  _   _ _   _ _____ ____ _____   _  _
+  / ___/ _ \| \ | | \ | | ____/ ___|_   _| | || |
+ | |  | | | |  \| |  \| |  _|| |     | |   | || |_
+ | |__| |_| | |\  | |\  | |__| |___  | |   |__   _|
+  \____\___/|_| \_|_| \_|_____\____| |_|      |_|
+");
+            Console.ResetColor();
+
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
 
