@@ -33,7 +33,7 @@ namespace Connect4_game
                 Player currentPlayer = players[currentPlayerIndex];
 
                 Console.WriteLine($"{currentPlayer.Name}'s turn ({currentPlayer.Symbol})");
-                Console.WriteLine("Choose a column (0-6): ");
+                Console.WriteLine("Choose a column (1-7): ");
                 int column;
 
                 //check valid input
