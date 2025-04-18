@@ -14,14 +14,23 @@ namespace Connect4_game
 
             SetupPlayers();
         }
+        // create players/ AI
         private void SetupPlayers() {
-            Console.WriteLine("Enter name for player 1: ");
+            Console.WriteLine("Enter name for Player 1:");
             string name1 = Console.ReadLine();
-            players[0] = new Player (name1, 'X');
+            players[0] = new Player(name1, 'X');
 
-            Console.WriteLine("Enter name for player 2: ");
-            string name2 = Console.ReadLine();
-            players[1] = new Player(name2, 'O');
+            Console.WriteLine("Play against AI? (yes/no):");
+            string aiChoice = Console.ReadLine().ToLower();
+
+            if (aiChoice == "yes" || aiChoice == "y") {
+                players[1] = new AIPlayer("Computer", 'O');
+            }
+            else {
+                Console.WriteLine("Enter name for Player 2:");
+                string name2 = Console.ReadLine();
+                players[1] = new Player(name2, 'O');
+            }
         }
 
         public void Start() {
@@ -33,24 +42,33 @@ namespace Connect4_game
                 Player currentPlayer = players[currentPlayerIndex];
 
                 Console.WriteLine($"{currentPlayer.Name}'s turn ({currentPlayer.Symbol})");
-                Console.WriteLine("Choose a column (0-6): ");
+                Console.WriteLine("Choose a column (1-7): ");
                 int column;
 
-                //check valid input
-                while(!int.TryParse(Console.ReadLine(), out column) || !board.DropDisc(column, currentPlayer.Symbol)) {
-                    Console.WriteLine("Invalid column, Try again:");
-                }
 
+                if (currentPlayer is AIPlayer ai) {
+                    column = ai.ChooseColumn(board);
+                    Console.WriteLine($"{currentPlayer.Name} chooses column {column}");
+                    board.DropDisc(column, currentPlayer.Symbol); // AI drops disc directly
+                }
+                else {
+                    // input checking
+                    while (!int.TryParse(Console.ReadLine(), out column) || !board.DropDisc(column, currentPlayer.Symbol)) {
+                        Console.WriteLine("Invalid column, Try again:");
+                    }
+                }
+                // check if win/ tie condition met
                 gameWon = WinChecker.HasWon(board.GetGrid(), currentPlayer.Symbol);
                 gameTie = board.IsFull();
 
+                // move to next players turn
                 if (!gameWon) {
                     currentPlayerIndex = (currentPlayerIndex + 1) % 2;
                 }
             }
 
             board.Print();
-
+            // print win text
             if (gameWon) {
                 Console.WriteLine($"{players[currentPlayerIndex].Name} Wins!");
             }
