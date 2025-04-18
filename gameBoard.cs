@@ -15,6 +15,9 @@
 
         public bool DropDisc(int col, char symbol)
         {
+            if (col < 0 || col > Cols) 
+                return false;
+
             for (int r = Rows - 1; r >= 0; r--)
             {
                 if (grid[r, col] == '.')
