@@ -1,5 +1,7 @@
 ﻿namespace Connect4_game
 {
-    public class gameBoard { }
+    public class GameBoard { 
+        
+    }
 
 }
