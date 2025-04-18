@@ -3,12 +3,12 @@
 namespace Connect4_game
 {
     public class Game {
-        private GameBoard board;
+        private Board board;
         private Player[] players;
         private int currentPlayerIndex;
 
         public Game() {
-            board = new GameBoard();
+            board = new Board();
             players = new Player[2];
             currentPlayerIndex = 0;
 
@@ -37,9 +37,12 @@ namespace Connect4_game
                 int column;
 
                 //check valid input
+                while(!int.TryParse(Console.ReadLine(), out column) || !board.DropDisc(column, currentPlayer.Symbol)) {
+                    Console.WriteLine("Invalid column, Try again:");
+                }
 
-                gameWon = checkWin.HasWon(currentPlayer.Symbol, board);
-                gameTie = board.isdraw();
+                gameWon = WinChecker.HasWon(board.GetGrid(), currentPlayer.Symbol);
+                gameTie = board.IsFull();
 
                 if (!gameWon) {
                     currentPlayerIndex = (currentPlayerIndex + 1) % 2;
