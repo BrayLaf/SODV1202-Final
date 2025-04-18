@@ -1,4 +1,4 @@
-﻿namespace Connect4
+﻿namespace Connect4_game
 {
     internal class Program
     {
