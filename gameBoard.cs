@@ -37,7 +37,13 @@
                 if (grid[0, c] == '.') return false;
             return true;
         }
+        public bool IsColumnFull(int colInput) {
+            int col = colInput - 1;
+            if (col < 0 || col >= 7)
+                return true;
 
+            return grid[0, col] != '.';
+        }
         public void Print()
         {
             Console.Clear();
