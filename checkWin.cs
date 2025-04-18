@@ -25,6 +25,7 @@
                         grid[r - 2, c + 2] == symbol && grid[r - 3, c + 3] == symbol)
                         return true;
 
+
             for (int r = 0; r <= rows - 4; r++)
                 for (int c = 0; c <= cols - 4; c++)
                     if (grid[r, c] == symbol && grid[r + 1, c + 1] == symbol &&

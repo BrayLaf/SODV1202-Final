@@ -13,9 +13,11 @@
                     grid[r, c] = '.';
         }
 
-        public bool DropDisc(int col, char symbol)
+        public bool DropDisc(int colInput, char symbol)
         {
-            if (col < 0 || col > Cols) 
+            int col = colInput - 1;
+
+            if (col < 0 || col >= Cols) 
                 return false;
 
             for (int r = Rows - 1; r >= 0; r--)
